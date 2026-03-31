@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --accent: #1a1a2e;
+    --accent2: #c8965a;
+    --text: #1a1a2e;
+    --muted: #8a8680;
+    --border: #e2ddd6;
+    --radius: 12px;
+    --font-display: 'DM Serif Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .wrapper {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid var(--border);
+  }
+
+  .field {
+    margin-bottom: 22px;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text);
+    background: var(--bg);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    appearance: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(26,26,46,0.07);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #c0bbb4;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .select-wrap {
+    position: relative;
+  }
+
+  .select-wrap::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--muted);
+    pointer-events: none;
+  }
+
+  select { cursor: pointer; }
+
+  .btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn:hover { background: #2d2d4e; }
+  .btn:active { transform: scale(0.99); }
+  .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .btn-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s;
+  }
+
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .notice {
+    margin-top: 20px;
+    padding: 14px 18px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .notice.success {
+    background: #f0faf5;
+    border: 1px solid #a3d9bc;
+    color: #1a6b42;
+    display: flex;
+  }
+
+  .notice.error {
+    background: #fdf3f3;
+    border: 1px solid #f0b8b8;
+    color: #962020;
+    display: flex;
+  }
+
+  .notice-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 28px 0;
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 24px;
+  }
+
+  @media (max-width: 480px) {
+    .card { padding: 28px 22px; }
+    .row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="header">
+    <span class="tag">✦ Contacto</span>
+    <h1>Cuéntanos en qué podemos ayudarte</h1>
+    <p class="subtitle">Rellena el formulario y te responderemos en menos de 24 horas.</p>
+  </div>
+
+  <div class="card">
+    <form id="contactForm">
+
+      <div class="row">
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+        </div>
+        <div class="field">
+          <label for="apellido">Apellido</label>
+          <input type="text" id="apellido" name="apellido" placeholder="Tu apellido">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+      </div>
+
+      <div class="field">
+        <label for="telefono">Teléfono (opcional)</label>
+        <input type="tel" id="telefono" name="telefono" placeholder="+34 600 000 000">
+      </div>
+
+      <div class="field">
+        <label for="asunto">Asunto</label>
+        <div class="select-wrap">
+          <select id="asunto" name="asunto" required>
+            <option value="" disabled selected>Selecciona un asunto</option>
+            <option value="informacion">Solicitar información</option>
+            <option value="presupuesto">Pedir presupuesto</option>
+            <option value="soporte">Soporte técnico</option>
+            <option value="colaboracion">Colaboración</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" placeholder="Describe tu consulta con el máximo detalle posible..." required></textarea>
+      </div>
+
+      <div class="divider"></div>
+
+      <button type="submit" class="btn" id="submitBtn">
+        <span class="btn-inner">
+          <span class="btn-text">Enviar mensaje</span>
+          <span class="spinner" id="spinner"></span>
+        </span>
+      </button>
+
+      <div class="notice" id="successMsg">
+        <span class="notice-icon">✓</span>
+        <span>¡Mensaje enviado! Te responderemos en menos de 24 horas.</span>
+      </div>
+
+      <div class="notice" id="errorMsg">
+        <span class="notice-icon">!</span>
+        <span id="errorText">Algo ha fallado. Por favor, inténtalo de nuevo.</span>
+      </div>
+
+    </form>
+  </div>
+
+  <p class="footer-note">Tu información está protegida y nunca será compartida con terceros.</p>
+</div>
+
+<script>
+  // ⚠️ IMPORTANTE: Sustituye esta URL por tu webhook de Make.com
+  // Pasos: Make.com → Nuevo escenario → Añadir módulo → Webhooks → Custom webhook → Copiar URL
+  const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/bergzwtvwblomlktvbd50rcnykuvf92t';
+
+  const form = document.getElementById('contactForm');
+  const btn = document.getElementById('submitBtn');
+  const spinner = document.getElementById('spinner');
+  const btnText = document.querySelector('.btn-text');
+  const successMsg = document.getElementById('successMsg');
+  const errorMsg = document.getElementById('errorMsg');
+  const errorText = document.getElementById('errorText');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Ocultar mensajes previos
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+
+    // Estado: cargando
+    btn.disabled = true;
+    spinner.style.display = 'block';
+    btnText.textContent = 'Enviando...';
+
+    const datos = {
+      nombre: form.nombre.value.trim(),
+      apellido: form.apellido.value.trim(),
+      email: form.email.value.trim(),
+      telefono: form.telefono.value.trim(),
+      asunto: form.asunto.value,
+      mensaje: form.mensaje.value.trim(),
+      fecha: new Date().toLocaleString('es-ES'),
+      origen: window.location.href
+    };
+
+    try {
+      const res = await fetch(MAKE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos)
+      });
+
+      if (res.ok) {
+        // Éxito
+        form.reset();
+        successMsg.style.display = 'flex';
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        throw new Error('Respuesta no OK: ' + res.status);
+      }
+    } catch (err) {
+      // Si el webhook no está configurado, mostrar instrucciones
+      if (MAKE_WEBHOOK_URL.includes('TU_WEBHOOK_AQUI')) {
+        errorText.textContent = 'Configura la URL del webhook en el código (línea 6 del script).';
+      } else {
+        errorText.textContent = 'Error al enviar. Revisa la consola para más detalles.';
+      }
+      errorMsg.style.display = 'flex';
+      console.error('Error webhook:', err);
+    } finally {
+      btn.disabled = false;
+      spinner.style.display = 'none';
+      btnText.textContent = 'Enviar mensaje';
+    }
+  });
+</script>
+
+</body>
+</html>
